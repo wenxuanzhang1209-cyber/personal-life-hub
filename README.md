@@ -6,6 +6,8 @@
 
 # NORTH · 个人生活与工作中枢
 
+> **English overview** · NORTH is a local-first personal workbench that keeps work, life, and private notes on one timeline while using space boundaries to avoid mixing them. It covers today overview, calendar, tasks, decisions, inbox, knowledge base, projects, templates, reviews, and global search — all persisted locally with JSON import/export.
+
 ## 界面预览
 
 ![个人生活与工作中枢](docs/screenshots/home.png)
