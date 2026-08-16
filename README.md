@@ -1,3 +1,9 @@
+<p align="left">
+  <img src="https://github.com/wenxuanzhang1209-cyber/personal-life-hub/actions/workflows/ci.yml/badge.svg" />
+  <img src="https://img.shields.io/github/license/wenxuanzhang1209-cyber/personal-life-hub" />
+  <img src="https://img.shields.io/github/v/release/wenxuanzhang1209-cyber/personal-life-hub?label=release" />
+</p>
+
 # NORTH · 个人生活与工作中枢
 
 这是一个本地优先的个人工作台，把工作、日常生活和私密记录放在同一条时间线上，同时用空间边界避免互相干扰。
