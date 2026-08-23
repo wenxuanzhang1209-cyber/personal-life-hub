@@ -1,58 +1,96 @@
-<p align="left">
-  <img src="https://github.com/wenxuanzhang1209-cyber/personal-life-hub/actions/workflows/ci.yml/badge.svg" />
-  <img src="https://img.shields.io/github/license/wenxuanzhang1209-cyber/personal-life-hub" />
-  <img src="https://img.shields.io/github/v/release/wenxuanzhang1209-cyber/personal-life-hub?label=release" />
+<p align="center">
+  <a href="https://github.com/wenxuanzhang1209-cyber/personal-life-hub/actions/workflows/ci.yml"><img src="https://github.com/wenxuanzhang1209-cyber/personal-life-hub/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <img src="https://img.shields.io/github/license/wenxuanzhang1209-cyber/personal-life-hub?style=flat-square" alt="License" />
+  <img src="https://img.shields.io/badge/storage-100%25%20local-3fb950?style=flat-square" alt="Local storage" />
+  <img src="https://img.shields.io/badge/React%20%2B%20TypeScript-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React" />
 </p>
 
-# NORTH · 个人生活与工作中枢
+# NORTH · Personal Life & Work Hub
 
-> **English overview** · NORTH is a local-first personal workbench that keeps work, life, and private notes on one timeline while using space boundaries to avoid mixing them. It covers today overview, calendar, tasks, decisions, inbox, knowledge base, projects, templates, reviews, and global search — all persisted locally with JSON import/export.
+**One timeline for work, life, and private notes — with boundaries so they don't bleed into each other.**
 
-## 界面预览
+<sub>把工作、生活和私密记录放在同一条时间线上，同时用空间边界避免互相干扰。</sub>
 
-![个人生活与工作中枢](docs/screenshots/home.png)
+![NORTH](docs/screenshots/home.png)
 
-这是一个本地优先的个人工作台，把工作、日常生活和私密记录放在同一条时间线上，同时用空间边界避免互相干扰。
+---
 
-## 已完成的产品能力
+## Why this exists
 
-- 今日总览：三个结果、统一时间线、等待事项、风险项目、最近资料
-- 日程：日视图、工作 / 生活 / 私密安排、未排时间任务
-- 任务库：状态流转、优先级、截止日、项目上下文、快速新增
-- 问题与决策：开放问题、等待外部、高风险、决策证据和状态
-- 收件箱：拖入 / 选择文件、原件保留、待确认状态、分析抽屉
-- 资料库：会议纪要、供应商简报、个人记录、生活文件、灵感库
-- 项目与领域：工作项目、生活领域、项目进度和下一步
-- 模板库：会议纪要、供应商尽调、周复盘、生活安排模板，可直接复制
-- 复盘：完成、等待、风险项目和生活信号
-- 全局搜索：项目、任务、文件
-- 本地持久化：浏览器本地保存，支持 JSON 导出与导入备份
-- 私密空间：单独的空间过滤；新增私密内容默认不进入文件助手分析
+Most personal tools force a choice: one app for work, another for life, a third for anything
+private. So the same afternoon gets split across three places, and the question "what is
+actually happening this week?" has no single answer.
 
-## 启动
+Merging everything into one list has the opposite problem — a therapy appointment sitting
+between two client deliverables is not a productivity feature.
+
+NORTH keeps one timeline and adds **space boundaries**: work, life, and private are separate
+lenses over the same data, not separate apps. You see the whole week when you want to, and
+only one part of it when someone is looking over your shoulder.
+
+<sub>大多数个人工具逼你二选一：工作一个应用、生活另一个、私密的再来一个——
+于是同一个下午被拆到三个地方，"这周到底在发生什么"没有一个统一答案。
+而全部合成一条列表又是另一种问题：一个私人预约夹在两个客户交付之间，
+那不叫效率。NORTH 用**空间边界**解决：工作、生活、私密是同一份数据上的不同视角。</sub>
+
+## What it does
+
+| View | What it holds |
+|---|---|
+| **Timeline** | Work / life / private entries on one axis, filtered by space |
+| **Tasks** | Status flow, priority, due date, project context |
+| **Projects** | Grouping, risk flags, overdue surfacing |
+| **Questions & decisions** | Open questions, waiting-on-others, decision records with evidence |
+| **Inbox** | Capture first, file later — with a "material never became an action" check |
+| **Materials** | Reference notes attached to projects |
+| **Templates** | Reusable structures for recurring work |
+| **Reviews** | Retrospectives tied to the period they cover |
+| **Search** | Across every view |
+
+Two details that came from actually using it: a **"waiting on someone" state that gets flagged
+when it goes stale**, and a check for **material that was saved but never turned into an
+action** — the two ways a personal system quietly stops being true.
+
+## Privacy
+
+Everything lives in your browser's `localStorage`. No account, no server, no sync service,
+no telemetry. Export and import as JSON when you want a backup or a move.
+
+That is also the honest limitation: **clearing site data deletes your data.** Export before
+you clean up a browser.
+
+<sub>全部数据存在浏览器 `localStorage`：无账号、无服务器、无同步、无遥测，
+可导出/导入 JSON。诚实的另一面：**清除站点数据会清掉你的数据**，清理浏览器前先导出。</sub>
+
+## Quick start
 
 ```bash
 npm install
-npm run dev
-```
-
-打开终端输出的本地地址即可。生产构建：
-
-```bash
+npm run dev        # http://localhost:5173
 npm run build
 ```
 
-## 数据与权限边界
+CI runs on Node 20.
 
-当前版本不会静默扫描整台电脑，也不会自动改写正式台账。文件拖入后只进入收件箱，分类、关联和确认由你决定。
+## Status
 
-下一阶段可以接入一个明确授权的本地目录桥接层：只读取用户授权的目录，记录文件指纹与变更，生成待确认建议，再由用户写入资料库。DOCX / PDF / PPTX / XLSX 的真实解析、页码引用和分析任务队列也应在这一层完成。
+Single-file React application (~840 lines) with CI on every push. It does what is listed
+above and nothing more — small on purpose. Issues and pull requests welcome.
 
-## 代码结构
+<sub>单文件 React 应用（约 840 行），每次推送跑 CI。功能就是上面列的那些，
+刻意保持小。欢迎 Issue 与 PR。</sub>
 
-- `src/App.tsx`：数据模型、种子数据、页面和交互逻辑
-- `src/styles.css`：视觉系统、布局、响应式样式
-- `src/vite-env.d.ts`：Vite 类型声明
-- `dist/`：`npm run build` 生成的生产包
+## License
 
-工作种子数据只使用会议纪要文件夹中已经出现的工作域，并把未经确认的内容标为“待确认”或“等待外部”；生活与私密种子数据只作为工作台演示结构，不代表任何真实完成状态。
+[MIT](LICENSE) © 2026 JKinco
+
+---
+
+<sub>
+<b>JKinco</b> — local-first tools for work whose data cannot leave the building ·
+<a href="https://github.com/wenxuanzhang1209-cyber/jkinco-listen-open">Listen</a> ·
+<a href="https://github.com/wenxuanzhang1209-cyber/jkinco-slides">Slides</a> ·
+<a href="https://github.com/wenxuanzhang1209-cyber/JKinco-Skills-Lab">Skills Lab</a> ·
+<a href="https://github.com/wenxuanzhang1209-cyber/personal-life-hub">Life Hub</a> ·
+<a href="https://github.com/wenxuanzhang1209-cyber/jkinco-tools">Tools</a>
+</sub>
