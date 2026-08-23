@@ -1,4 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
+/* 这里原先从 fonts.googleapis.com 外链 DM Mono 和 Manrope。
+   那意味着这个「数据不出本机」的应用每次打开都会向 Google 发一次请求，
+   把访问者的 IP 和访问时间交出去 —— 而 README 上写着 no server、
+   no telemetry，用户是看着那句话才把私密记录写进来的。
+
+   字体不值得拿这个换。改用系统字体栈：装了 DM Mono / Manrope 的机器
+   照常用，没装的用系统等宽和无衬线，观感略有差别，但一次外连都没有。
+
+   想要完全一致的排版，把这两个字体的 woff2 自托管进 public/fonts/
+   再用 @font-face 引用即可 —— 两者都是 SIL OFL 授权，可以随仓库分发。
+
+   scripts/check-local-only.mjs 会拦住任何重新引入外链资源的改动。 */
 
 :root {
   font-family: Inter, Manrope, -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
@@ -100,8 +111,8 @@ h2 { font-size: 20px; letter-spacing: -.03em; line-height: 1.2; font-weight: 700
 h3 { font-size: 15px; letter-spacing: -.02em; line-height: 1.25; font-weight: 700; }
 .lead, .page-header p { margin-top: 12px; color: var(--muted); font-size: 13px; line-height: 1.6; }
 .date-stamp { border-left: 1px solid var(--line); padding: 4px 0 5px 23px; display: flex; flex-direction: column; align-items: flex-start; min-width: 94px; }
-.date-stamp span { color: var(--muted); font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .12em; }
-.date-stamp strong { font-family: 'DM Mono', monospace; color: var(--ink); font-size: 24px; letter-spacing: -.1em; margin-top: 4px; }
+.date-stamp span { color: var(--muted); font-family: 'DM Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: .12em; }
+.date-stamp strong { font-family: 'DM Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace; color: var(--ink); font-size: 24px; letter-spacing: -.1em; margin-top: 4px; }
 .page-header { align-items: center; margin-bottom: 31px; }
 .page-header-actions { display: flex; align-items: center; gap: 9px; }
 .capture-bar { min-height: 60px; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 7px 22px rgba(31,32,30,.035); display: flex; align-items: center; padding: 8px 9px 8px 18px; margin-bottom: 35px; }
@@ -129,11 +140,11 @@ h3 { font-size: 15px; letter-spacing: -.02em; line-height: 1.25; font-weight: 70
 .check-control:hover { border-color: var(--blue); }
 .outcome-row .check-control { margin-left: 2px; }
 .outcome-row .check-control:not(:empty), .task-table-row .check-control:not(:empty) { background: var(--navy); border-color: var(--navy); }
-.outcome-index { color: #a3a5a2; font-family: 'DM Mono', monospace; font-size: 11px; width: 23px; }
+.outcome-index { color: #a3a5a2; font-family: 'DM Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace; font-size: 11px; width: 23px; }
 .outcome-copy { min-width: 0; flex: 1; display: flex; flex-direction: column; gap: 6px; }
 .outcome-copy strong { font-size: 14px; font-weight: 650; letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .outcome-copy span { color: var(--muted); font-size: 11px; }
-.priority { border-radius: 4px; padding: 3px 6px; font-size: 10px; font-weight: 700; font-family: 'DM Mono', monospace; }
+.priority { border-radius: 4px; padding: 3px 6px; font-size: 10px; font-weight: 700; font-family: 'DM Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace; }
 .priority-p0 { background: var(--red-soft); color: var(--red); }
 .priority-p1 { background: var(--amber-soft); color: var(--amber); }
 .priority-p2 { background: var(--blue-soft); color: var(--blue); }
@@ -141,7 +152,7 @@ h3 { font-size: 15px; letter-spacing: -.02em; line-height: 1.25; font-weight: 70
 .timeline { border-top: 1px solid var(--line); }
 .timeline-row { display: grid; grid-template-columns: 59px 22px minmax(0, 1fr); gap: 9px; min-height: 78px; position: relative; }
 .timeline-time { padding-top: 16px; display: flex; flex-direction: column; gap: 2px; text-align: right; }
-.timeline-time strong { font-family: 'DM Mono', monospace; color: var(--ink); font-size: 12px; }
+.timeline-time strong { font-family: 'DM Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace; color: var(--ink); font-size: 12px; }
 .timeline-time span { color: #a4a6a4; font-size: 10px; }
 .timeline-line { position: relative; display: flex; justify-content: center; }
 .timeline-line::before { content: ''; position: absolute; top: 0; bottom: 0; width: 1px; background: var(--line); }
@@ -185,7 +196,7 @@ h3 { font-size: 15px; letter-spacing: -.02em; line-height: 1.25; font-weight: 70
 .pulse-copy > span { color: var(--muted); font-size: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .progress-track { height: 3px; width: 100%; background: #e8e6e0; border-radius: 3px; overflow: hidden; }
 .progress-track i { display: block; height: 100%; background: var(--blue); border-radius: 3px; }
-.pulse-percent { color: #a3a5a2; font-family: 'DM Mono', monospace; font-size: 9px; }
+.pulse-percent { color: #a3a5a2; font-family: 'DM Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace; font-size: 9px; }
 .mini-file { width: 100%; display: flex; align-items: center; gap: 9px; background: transparent; border: 0; border-top: 1px solid var(--line-soft); padding: 11px 0; text-align: left; color: var(--ink); }
 .mini-file:hover .mini-file-copy strong { color: var(--blue); }
 .file-type-dot { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 8px; flex: 0 0 auto; }
@@ -268,14 +279,14 @@ h3 { font-size: 15px; letter-spacing: -.02em; line-height: 1.25; font-weight: 70
 .calendar-actions { display: flex; align-items: center; gap: 10px; margin-left: auto; }
 .calendar-grid { display: grid; grid-template-columns: 60px minmax(0, 1fr); background: rgba(255,254,250,.45); border: 1px solid var(--line); border-radius: 13px; overflow: hidden; min-height: 1025px; }
 .calendar-hours { padding-top: 18px; border-right: 1px solid var(--line-soft); background: rgba(240,238,232,.5); }
-.calendar-hours span { height: 70px; padding-right: 9px; display: block; text-align: right; color: #a4a6a2; font-family: 'DM Mono', monospace; font-size: 10px; }
+.calendar-hours span { height: 70px; padding-right: 9px; display: block; text-align: right; color: #a4a6a2; font-family: 'DM Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace; font-size: 10px; }
 .calendar-track { position: relative; padding-top: 18px; }
 .hour-line { height: 70px; border-bottom: 1px solid var(--line-soft); position: relative; }
 .hour-line span { width: 100%; height: 1px; }
 .calendar-event { position: absolute; left: 22px; right: 22px; border-left: 3px solid var(--blue); background: var(--blue-soft); border-radius: 6px; padding: 9px 11px; display: flex; flex-direction: column; gap: 3px; overflow: hidden; }
 .calendar-event.event-life { border-left-color: var(--sage); background: var(--sage-soft); }
 .calendar-event.event-private { border-left-color: var(--wine); background: var(--wine-soft); }
-.calendar-event span { color: var(--muted); font-family: 'DM Mono', monospace; font-size: 9px; }
+.calendar-event span { color: var(--muted); font-family: 'DM Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace; font-size: 9px; }
 .calendar-event strong { color: var(--ink); font-size: 11px; }
 .calendar-event small { color: var(--muted); font-size: 10px; }
 .unscheduled-chip { position: absolute; left: 36%; right: 22px; height: 31px; display: flex; align-items: center; gap: 8px; border: 1px dashed #c5b586; background: #fffbef; border-radius: 6px; padding: 0 8px; color: var(--ink-soft); }
@@ -284,7 +295,7 @@ h3 { font-size: 15px; letter-spacing: -.02em; line-height: 1.25; font-weight: 70
 .unscheduled-chip small { margin-left: auto; color: var(--amber); font-size: 9px; }
 
 .project-summary-strip { display: flex; align-items: center; gap: 25px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); min-height: 61px; color: var(--muted); font-size: 11px; margin-bottom: 27px; }
-.project-summary-strip strong { color: var(--ink); font-family: 'DM Mono', monospace; font-size: 16px; margin-right: 4px; }
+.project-summary-strip strong { color: var(--ink); font-family: 'DM Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace; font-size: 16px; margin-right: 4px; }
 .summary-link { margin-left: auto; color: var(--blue); display: inline-flex; align-items: center; gap: 5px; border: 0; background: transparent; font-size: 11px; cursor: pointer; }
 .summary-link:hover { color: var(--ink); }
 .project-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 17px; }
@@ -304,13 +315,13 @@ h3 { font-size: 15px; letter-spacing: -.02em; line-height: 1.25; font-weight: 70
 .project-next strong { color: var(--ink-soft); font-size: 11px; line-height: 1.45; }
 .project-card-footer { display: flex; align-items: center; gap: 9px; padding-top: 14px; }
 .project-card-footer .progress-track { flex: 1; }
-.project-card-footer span { color: #999d99; font-family: 'DM Mono', monospace; font-size: 9px; white-space: nowrap; }
+.project-card-footer span { color: #999d99; font-family: 'DM Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace; font-size: 9px; white-space: nowrap; }
 .project-updated { color: #aaa9a4; font-size: 9px; padding-top: 12px; }
 
 .metric-strip { display: flex; align-items: center; gap: 31px; min-height: 70px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 24px; }
 .metric-strip > div:not(.metric-note) { display: flex; align-items: baseline; gap: 7px; }
 .metric-strip > div:not(.metric-note) span { color: var(--muted); font-size: 10px; }
-.metric-strip > div:not(.metric-note) strong { color: var(--ink); font-family: 'DM Mono', monospace; font-size: 22px; font-weight: 500; }
+.metric-strip > div:not(.metric-note) strong { color: var(--ink); font-family: 'DM Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace; font-size: 22px; font-weight: 500; }
 .metric-note { margin-left: auto; display: flex; align-items: center; gap: 7px; color: var(--muted); font-size: 10px; }
 .metric-note svg { color: var(--amber); }
 .issues-layout { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(350px, .8fr); gap: 17px; }
@@ -363,7 +374,7 @@ h3 { font-size: 15px; letter-spacing: -.02em; line-height: 1.25; font-weight: 70
 .review-hero p { color: #b4b8b7; font-size: 12px; line-height: 1.7; max-width: 430px; margin-top: 11px; }
 .review-stats { display: flex; gap: 42px; padding-top: 32px; }
 .review-stats div { display: flex; flex-direction: column; gap: 4px; }
-.review-stats strong { font-family: 'DM Mono', monospace; font-size: 28px; font-weight: 500; }
+.review-stats strong { font-family: 'DM Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace; font-size: 28px; font-weight: 500; }
 .review-stats span { color: #9ba0a0; font-size: 10px; }
 .review-checklist { padding: 22px; }
 .review-check { min-height: 46px; display: flex; align-items: center; gap: 9px; border-top: 1px solid var(--line-soft); color: var(--ink-soft); font-size: 11px; }

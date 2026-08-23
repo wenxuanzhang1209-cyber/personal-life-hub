@@ -16,3 +16,13 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+
+      # README 顶上挂着 `storage-100% local` 和 `No network calls` 两个徽章。
+      # 这类承诺写完那天是真的，之后谁加一个埋点、一个字体 CDN、一次 fetch，
+      # 徽章还挂在那儿，没有任何东西会红。
+      #
+      # 而这恰恰是最不能靠自觉的一类承诺：用户信了它，才把私密记录写进来。
+      # 加这一步的时候扫描器就抓到一处 —— styles.css 从 Google Fonts
+      # 外链字体，每次打开都把访问者 IP 交出去。
+      - name: Promise still holds
+        run: node scripts/check-local-only.mjs
